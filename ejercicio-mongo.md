@@ -140,7 +140,38 @@ Resutado:
 Respuesta:
 
 ```
-db.film_actor.aggregate(...
+
+db.actor.aggregate([
+  {
+    $lookup: {
+      from: "film_actor",
+      localField: "_id",
+      foreignField: "actor_id",
+      as: "films"
+    }
+  },
+  {
+    $group: {
+      _id: "$_id",
+      first_name: { $first: "$first_name" },
+      last_name: { $first: "$last_name" },
+      film_count: { $sum: { $size: "$films" } }
+    }
+  },
+  {
+    $match: {
+      film_count: { $gt: 35 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      first_name: 1,
+      last_name: 1,
+      film_count: 1
+    }
+  }
+])
 ```
 
 3. Mostrar el listado de los 10 de actores que mas peliculas realizó en la categoria `Comedy`. (Ver lookup, unwind, match, group, limit)
