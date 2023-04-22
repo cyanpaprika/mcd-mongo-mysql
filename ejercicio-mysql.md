@@ -37,11 +37,11 @@ Respuesta:
 ```sql
 -- Su respuesta aqui:
 
-SELECT city.city, COUNT(*) as NumeroDeTiendas
+SELECT city.city_id, city.city, COUNT(*) as store_count
 FROM store
     INNER JOIN address ON store.address_id = address.address_id
     INNER JOIN city ON address.city_id = city.city_id
-GROUP BY city.city;
+GROUP BY city.city_id;
 
 ```
 
