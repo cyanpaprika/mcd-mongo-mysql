@@ -43,6 +43,12 @@ FROM store
     INNER JOIN city ON address.city_id = city.city_id
 GROUP BY city.city_id;
 
+SELECT c.city_id, c.city, COUNT(*) as store_count
+FROM store s
+    INNER JOIN address a ON s.address_id = a.address_id
+    INNER JOIN city c ON a.city_id = c.city_id
+GROUP BY c.city_id;
+
 ```
 
 2. Listar la cantidad de películas que se hicieron por lenguaje.
