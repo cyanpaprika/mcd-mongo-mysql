@@ -65,7 +65,11 @@ Respuesta:
 ```sql
 -- Su respuesta aqui:
 
-SELECT ...
+SELECT l.name language, COUNT(f.film_id) film_count
+FROM language l LEFT JOIN film f ON l.language_id = f.language_id
+GROUP BY l.name;
+
+
 
 ```
 
