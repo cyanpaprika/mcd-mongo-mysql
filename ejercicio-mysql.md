@@ -166,6 +166,16 @@ Respuesta:
 ```sql
 -- Su respuesta aqui:
 
-SELECT ...
+SELECT actor.actor_id, actor.first_name, actor.last_name
+FROM actor
+WHERE actor.actor_id NOT IN (
+    SELECT DISTINCT actor.actor_id
+    FROM actor
+    JOIN film_actor ON actor.actor_id = film_actor.actor_id
+    JOIN film_category ON film_actor.film_id = film_category.film_id
+    JOIN category ON film_category.category_id = category.category_id
+    WHERE category.name = 'Comedy'
+);
+
 
 ```
