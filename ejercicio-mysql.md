@@ -95,8 +95,11 @@ Respuesta:
 ```sql
 -- Su respuesta aqui:
 
-SELECT ...
-
+SELECT a.actor_id, a.first_name, a.last_name, COUNT(fa.actor_id) AS film_count
+FROM actor a
+    INNER JOIN film_actor fa ON a.actor_id = fa.actor_id
+GROUP BY a.actor_id
+HAVING COUNT(fa.actor_id) > 35;
 ```
 
 4. Mostrar el listado de los 10 de actores que mas peliculas realizó en la categoria `Comedy`.
